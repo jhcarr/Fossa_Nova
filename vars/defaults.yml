@@ -1,0 +1,23 @@
+---
+# DEFAULT SETTINGS
+
+# About my machine
+connected_to_f5_vpn_default: no
+
+# Common settings
+user_home: /home/jay/
+profile_location: /etc/profile
+
+# Apt settings
+apt_java_home: /usr/lib/jvm/java-8-oracle
+
+# Tomcat settings
+tomcat_version_number: 8.5.11
+tomcat_installation_path: '/usr/local/tomcat'
+tomcat_catalina_home: "{{ tomcat_installation_path }}/apache-tomcat-{{ tomcat_version_number }}"
+
+# Subversion settings
+svn_server_url: https://svn.safety.af.mil/svn/code/
+svn_project_name: afsas_code/trunk
+svn_checkout_directory_path: "{{ ansible_env.HOME }}/svn_workbench/"
+svn_local_project_path: "{{ svn_checkout_directory_path }}{{ svn_project_name }}"

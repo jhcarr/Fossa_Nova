@@ -1,0 +1,31 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars_files:
+    - vars/defaults.yml
+    - vars/authentication.yml
+  vars_prompt:
+
+    - name: "connected_to_f5_vpn"
+      prompt: "Are you currently connected to the F5 VPN? (yes/True/no/False)"
+      private: no
+      default: "{{ connected_to_f5_vpn_default }}"
+
+    - name: "svn_server_username"
+      prompt: "Please provide your svn server username"
+      private: no
+      default: "{{ svn_server_username_default }}"
+
+    - name: "svn_server_password"
+      prompt: "Please provide your svn server password"
+      private: yes
+      default: "{{ svn_server_password_default }}"
+
+  # See "/roles" directory
+  roles:
+    - provisioner_setup
+    - apt
+#    - tomcat
+#    - svn
+#    - afsas
+#    - provisioner_followup

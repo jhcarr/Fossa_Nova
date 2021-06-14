@@ -1,0 +1,48 @@
+---
+# Apt package installation/configuration tasks
+- name: Get basic apt packages
+  become: yes
+  apt:
+    name:
+      - opensc
+      - subversion
+      - ant
+      - software-properties-common
+      - openjdk-11-jdk
+    state: latest
+    update_cache: yes
+
+# J's favorite apt-packages
+- name: Get J's favorite apt-packages
+  become: yes
+  apt:
+    name:
+      - tree
+      - zsh
+      - keepassx
+      - terminator
+      - emacs
+      - git
+      - gnome-tweaks
+    state: latest
+    update_cache: yes
+
+- name: Create Tools dir
+  become: no
+  file: state=directory path={{ user_home }}/Tools
+
+- name: Get Oh-My-Zsh installation script
+  become: no
+  get_url:
+    url: https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh
+    dest: {{ user_home }}/Tools
+
+# TODO: Update $JAVA_HOME
+- name: Configuration notices
+  debug:
+    msg:
+      - 'apt role TODO:'
+      - ' - Update $JAVA_HOME'
+      - ' - Set up Oh-my-zsh'
+      - ' - Import and run Dotfiles'  
+
