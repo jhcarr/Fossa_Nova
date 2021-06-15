@@ -1,5 +1,6 @@
 # FOSSA NOVA
 J Carr, 7/14/2021
+Did your install of Ubuntu 20.04 Focal Fossa explode? Do the Fossa Nova!
 
 ## PURPOSE
 
@@ -13,22 +14,12 @@ If in the course of our project's lifecycle the techniques in this provisioner s
 If you're reading this on your own developer-workstation, then hopefully you have:
 
 1. Imaged this machine with with your favorite OS
-2. Performed basic machine set up tasks such as configuring your admin username, setting up your favorite dot file configs
+2. Performed basic machine set up tasks such as configuring your admin username
 
-Assuming you have done these things and you have now been handed this provisioner, you should ensure that you have Ansible's basic dependencies met:
+Assuming you have done these things and you have now acquired this provisioner, you should ensure that you have Ansible's basic dependencies met:
 
 1. Ensure that you are connected to the internet.
-2. Ensure that you have installed Python 2.6 or greater (on Ubuntu, it's included by default)
-
-    ``` bash
-    # Is Python installed?
-    which python
-
-    # Which version?
-    python --version
-    ```
-
-3. Ensure that you have installed Ansible (you may uninstall it after, if you wish)
+2. Ensure that you have installed Ansible (you may uninstall it after, if you wish)
 
     ``` bash
     # Is Ansible installed?
@@ -52,8 +43,8 @@ Run the Ansible Playbook named "playbook.yml" in your choice of verbose mode (in
 
 ### Default behavior/settings
 
-This provisioner's default settings are defined in "/vars/defaults.yml"
-
+Default environment settings are defined in "/vars/defaults.yml":
 - Environment variables are exported to the system in "/etc/profile".
-- Tomcat server version 8.5.11 is installed in "/usr/local/tomcat/".
+- Tomcat server version 9.0.46 is installed in "/usr/local/tomcat/".
 
+Default security settings are defined in "/vars/authentication.yml" (You will need to provide your own)

@@ -1,0 +1,37 @@
+---
+# Package installation/configuration tasks
+- name: Get basic packages
+  become: yes
+  package:
+    name:
+      - opensc
+      - pcscd
+      - pcsc-tools
+      - subversion
+      - ant
+      - software-properties-common
+      - '{{ jdk_version }}'
+      
+      # Add your preferred packages below:
+      - tree
+      - zsh
+      - keepassx
+      - terminator
+      - emacs
+      - git
+      - make
+      - gnome-tweaks
+    state: latest
+    update_cache: yes
+
+# - name: Assign $JAVA_HOME variable
+#   become: yes
+#   lineinfile:
+#     path: "{{ profile_location }}"
+#     line: "export JAVA_HOME=\"{{ java_home }}\";"
+
+- name: Configuration notices
+  debug:
+    msg:
+      - "The tomcat role has made the following changes:"
+      - " - Exported $JAVA_HOME in {{ profile_location }}."

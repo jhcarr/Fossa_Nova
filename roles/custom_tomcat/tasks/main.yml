@@ -1,0 +1,27 @@
+---
+# Tomcat installation tasks
+- name: Create Tomcat install directory
+  become: yes
+  ansible.builtin.file:
+    path: '{{ tomcat_installation_path }}'
+    state: directory
+    mode: '775'
+
+- name: Download and install Apache Tomcat
+  unarchive:
+    src: http://archive.apache.org/dist/tomcat/tomcat-{{ tomcat_version_number.split(".")[0] }}/v{{ tomcat_version_number }}/bin/apache-tomcat-{{ tomcat_version_number }}.tar.gz
+    dest: '{{ tomcat_installation_path }}'
+    remote_src: yes
+
+# - name: Assign $CATALINA_HOME variable
+#   become: yes
+#   lineinfile:
+#     path: "{{ profile_location }}"
+#     line: "export CATALINA_HOME=\"{{ tomcat_installation_path }}\";"
+
+- name: Configuration notices
+  debug:
+    msg:
+      - "The tomcat role has made the following changes:"
+      - " - Installed Tomcat {{ tomcat_version_number }} in {{ tomcat_installation_path }}"
+      - " - Exported $CATALINA_HOME in {{ profile_location }}."
