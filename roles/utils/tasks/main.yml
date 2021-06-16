@@ -14,6 +14,7 @@
       
       # Add your preferred packages below:
       - tree
+      - silversearcher-ag
       - zsh
       - keepassx
       - terminator
@@ -30,8 +31,23 @@
 #     path: "{{ profile_location }}"
 #     line: "export JAVA_HOME=\"{{ java_home }}\";"
 
+- name: Configure saving subversion CLI/svn passwords
+  block:
+    - name: Force svn to generate .subversion config folder
+      command: svn --version
+      warn: no
+
+    - name: Add password settings to .subversion/server
+      ansible.builtin.blockinfile:
+        path: "{{ user_home }}/.subversion/servers"
+        backup: yes
+        block: |
+          store-passwords = yes
+          store-plaintext-passwords = yes
+
 - name: Configuration notices
   debug:
     msg:
-      - "The tomcat role has made the following changes:"
+      - "The utils role has made the following changes:"
       - " - Exported $JAVA_HOME in {{ profile_location }}."
+      - " - Configured Subversion CLI to store plaintext passwords."
