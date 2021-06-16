@@ -1,5 +1,4 @@
 # FOSSA NOVA
-J Carr, 7/14/2021
 Did your install of Ubuntu 20.04 Focal Fossa explode? Do the Fossa Nova!
 
 ## PURPOSE
