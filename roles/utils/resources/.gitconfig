@@ -1,0 +1,13 @@
+[user]
+	name = jhcarr
+	email = justin.h.carr@gmail.com
+[color]
+	ui = auto
+[alias]
+        swag=fetch --all
+        cff=merge --ff-only
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+[push]
+	default = simple
+[diff]
+	tool = kdiff3

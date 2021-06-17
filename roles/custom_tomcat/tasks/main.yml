@@ -13,11 +13,16 @@
     dest: '{{ tomcat_installation_path }}'
     remote_src: yes
 
-# - name: Assign $CATALINA_HOME variable
-#   become: yes
-#   lineinfile:
-#     path: "{{ profile_location }}"
-#     line: "export CATALINA_HOME=\"{{ tomcat_installation_path }}\";"
+- name: Assign $CATALINA_HOME variable
+  become: yes
+  lineinfile:
+    path: "{{ profile_location }}"
+    line: "export CATALINA_HOME=\"{{ tomcat_installation_path }}\";"
+
+- name: Create empty 'documents' directory
+  file:
+    path: '{{ tomcat_installation_path }}/documents'
+    state: directory
 
 - name: Configuration notices
   debug:
@@ -25,3 +30,8 @@
       - "The tomcat role has made the following changes:"
       - " - Installed Tomcat {{ tomcat_version_number }} in {{ tomcat_installation_path }}"
       - " - Exported $CATALINA_HOME in {{ profile_location }}."
+      - ""
+      - "TODO:"
+      - " - place OJDBC driver into $CATALINA_HOME/lib/"
+      - " - place keystore file into $CATALINA_HOME/conf"
+      - " - place truststore file into $CATALINA_HOME/conf"

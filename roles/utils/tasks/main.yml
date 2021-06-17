@@ -25,17 +25,16 @@
     state: latest
     update_cache: yes
 
-# - name: Assign $JAVA_HOME variable
-#   become: yes
-#   lineinfile:
-#     path: "{{ profile_location }}"
-#     line: "export JAVA_HOME=\"{{ java_home }}\";"
+- name: Assign $JAVA_HOME variable
+  become: yes
+  lineinfile:
+    path: "{{ profile_location }}"
+    line: "export JAVA_HOME=\"{{ java_home }}\";"
 
 - name: Configure saving subversion CLI/svn passwords
   block:
     - name: Force svn to generate .subversion config folder
       command: svn --version
-      warn: no
 
     - name: Add password settings to .subversion/server
       ansible.builtin.blockinfile:
