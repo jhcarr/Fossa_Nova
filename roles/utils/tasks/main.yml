@@ -25,6 +25,12 @@
     state: latest
     update_cache: yes
 
+- name: Optionally download VS Code
+  when: ansible_distribution == "Ubuntu"
+  snap:
+    name: code
+    classic: yes
+
 - name: Assign $JAVA_HOME variable
   become: yes
   lineinfile:
