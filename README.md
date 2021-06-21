@@ -34,7 +34,9 @@ Assuming you have done these things and you have now acquired this provisioner, 
 
 ### Run
 
-Run the Ansible Playbook named "playbook.yml" in your choice of verbose mode (in the example below we're using more-verbose) so we can see what's going on and ask for the admin password when admin rights are required:
+Run the Ansible Playbook named "playbook.yml"
+- It is recommended that you run with some mode of "verbose" debugging (especially since this project is meant to run on localhost). Ansible has 4 levels of verboseness: "-v" up to "-vvvv"
+- You will need to ask ansible to prompt you for your administrator password using "--ask-become-pass" to perform admin-level config changes.
 
 ``` bash
     ansible-playbook playbook.yml -vv --ask-become-pass
