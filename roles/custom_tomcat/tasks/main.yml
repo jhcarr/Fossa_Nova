@@ -24,6 +24,13 @@
     path: '{{ tomcat_installation_path }}/documents'
     state: directory
 
+- name: Clear out the default /webapps folder
+  block:
+    - file: path="{{ tomcat_installation_path }}/webapps/docs" state=absent
+    - file: path="{{ tomcat_installation_path }}/webapps/examples" state=absent
+    - file: path="{{ tomcat_installation_path }}/webapps/host-manager" state=absent
+    - file: path="{{ tomcat_installation_path }}/webapps/manager" state=absent
+
 - name: Configuration notices
   debug:
     msg:
