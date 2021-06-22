@@ -22,6 +22,8 @@
       - git
       - make
       - gnome-tweaks
+      - arc-theme
+      - moka-icon-theme
     state: latest
     update_cache: yes
 
