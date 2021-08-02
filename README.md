@@ -1,11 +1,6 @@
 # FOSSA NOVA
 Did your install of Ubuntu 20.04 Focal Fossa explode? Do the Fossa Nova!
 
-## PURPOSE
-
-This project is intended to provision an AFSAS developer's machine for development on all aspects of the AFSAS project.
-If in the course of our project's lifecycle the techniques in this provisioner should become out-of-date or invalid, then it falls to you, dear reader, to take up the torch and update this project or burn it all down.
-
 ## USAGE
 
 ### Setup
