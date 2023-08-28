@@ -5,7 +5,7 @@
 connected_to_f5_vpn_default: no
 
 # Common settings
-user_home: /home/jay
+user_home: /home/j
 profile_location: /etc/profile
 
 # Java settings
