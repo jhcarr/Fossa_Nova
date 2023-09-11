@@ -29,9 +29,56 @@
 
 - name: Download VS Code
   when: ansible_distribution == "Ubuntu"
+  become: yes
   community.general.snap:
     name: code
     classic: true
+
+- name: Make Z Shell default shell option for current user
+  become: yes
+  user:
+    name: "{{ ansible_user_id }}"
+    shell: /usr/bin/zsh  
+
+- name: Apply dotfiles from ../resources
+  block:
+    - name: Create backup dotfiles folder
+      ansible.builtin.file:
+        path: "{{ user_home }}/.dotfiles_backup"
+        state: directory
+
+    - name: Backup existing dotfiles
+      block:
+        - name: Previous .zshrc
+          ansible.builtin.copy:
+            src: "{{ user_home }}/.zshrc"
+            dest: "{{ user_home }}/.dotfiles_backup/.zshrc-{{ ansible_date_time.iso8601 }}"
+          when: '"{{ user_home }}/.zshrc" is file'
+        - name: Previous .gitconfig
+          ansible.builtin.copy:
+            src: "{{ user_home }}/.gitconfig"
+            dest: "{{ user_home }}/.dotfiles_backup/.gitconfig-{{ ansible_date_time.iso8601 }}"
+          when: '"{{ user_home }}/.gitconfig" is file'
+        - name: Previous .emacs.d
+          ansible.builtin.copy:
+            src: "{{ user_home }}/.emacs.d"
+            dest: "{{ user_home }}/.dotfiles_backup/.emacs.d-{{ ansible_date_time.iso8601 }}"
+          when: '"{{ user_home }}/.emacs.d" is directory'
+  
+    - name: Install ../resources dotfiles
+      block:
+        - name: New .zshrc
+          ansible.builtin.copy:
+            src: "{{ playbook_dir }}/roles/utils/resources/.zshrc"
+            dest: "{{ user_home }}/.zshrc"
+        - name: New .gitconfig
+          ansible.builtin.copy:
+            src: "{{ playbook_dir }}/roles/utils/resources/.gitconfig"
+            dest: "{{ user_home }}/.gitconfig"
+        - name: New .emacs.d
+          ansible.builtin.copy:
+            src: "{{ playbook_dir }}/roles/utils/resources/.emacs.d"
+            dest: "{{ user_home }}/.emacs.d"
 
 - name: Assign $JAVA_HOME variable
   become: yes

@@ -8,6 +8,6 @@
   roles:
 #    - provisioner_setup
     - utils
-    - custom_tomcat
+#    - custom_tomcat
 #    - svn
 #    - afsas
