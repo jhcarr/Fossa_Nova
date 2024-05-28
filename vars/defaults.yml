@@ -17,8 +17,3 @@ java_home: /usr/lib/jvm/java-11-openjdk-amd64
 tomcat_version_number: 9.0.46
 tomcat_installation_path: '{{ user_home }}/Tools/apache-tomcat-{{ tomcat_version_number }}'
 
-# Subversion settings
-svn_server_url: https://svn.safety.af.mil/svn/code/
-svn_project_name: afsas_code/trunk
-svn_checkout_directory_path: "{{ ansible_env.HOME }}/svn_workbench/"
-svn_local_project_path: "{{ svn_checkout_directory_path }}{{ svn_project_name }}"

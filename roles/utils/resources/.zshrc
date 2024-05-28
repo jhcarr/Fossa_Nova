@@ -56,7 +56,11 @@ export PATH="$PATH:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/git/bin:$JAVA_HOME/b
 export PATH="$PATH:/usr/local/bin"
 
 ### Tools Directory
-export MY_TOOLS="/home/jay/Tools"
+export MY_TOOLS="/home/j/Tools"
 export SQL_DEVELOPER="$MY_TOOLS/sqldeveloper"
 export NODE="$MY_TOOLS/node-v6.9.5-linux-x64"
 export PATH="$PATH:$MY_TOOLS:$SQL_DEVELOPER:$CATALINA_HOME:$NODE/bin"
+
+### Python3 package installation workaround
+export PYTHON_PACKAGES="/home/j/.local/bin/"
+export PATH="$PATH:$PYTHON_PACKAGES"

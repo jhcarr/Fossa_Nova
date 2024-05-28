@@ -6,8 +6,5 @@
 
   # See "/roles" directory
   roles:
-#    - provisioner_setup
     - utils
-#    - custom_tomcat
-#    - svn
-#    - afsas
+

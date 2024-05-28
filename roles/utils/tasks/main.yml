@@ -1,6 +1,6 @@
 ---
 # Package installation/configuration tasks
-- name: Get basic packages
+- name: Get packages from system package manager
   become: yes
   package:
     name:
@@ -24,6 +24,7 @@
       - gnome-tweaks
       - arc-theme
       - moka-icon-theme
+
     state: latest
     update_cache: yes
 
