@@ -13,6 +13,8 @@
       - '{{ jdk_version }}'
       
       # Add your preferred packages below:
+      - curl
+      - wget
       - tree
       - silversearcher-ag
       - zsh
@@ -41,6 +43,12 @@
     name: "{{ ansible_user_id }}"
     shell: /usr/bin/zsh  
 
+- name: Create Tools directory
+  ansible.builtin.file:
+    path: "{{ user_home }}/Tools"
+    state: directory
+    mode: "0755"
+
 - name: Apply dotfiles from ../resources
   block:
     - name: Create backup dotfiles folder
@@ -66,6 +74,20 @@
             dest: "{{ user_home }}/.dotfiles_backup/.emacs.d-{{ ansible_date_time.iso8601 }}"
           when: '"{{ user_home }}/.emacs.d" is directory'
   
+    - name: Ensure correct home dir path (Tools)
+      lineinfile:
+        path: "{{ playbook_dir }}/roles/utils/resources/.zshrc"
+        regexp: "^export MY_TOOLS"
+        line: "export MY_TOOLS=\"{{ user_home }}/Tools\""
+        insertbefore: "### Tools Directory"
+
+    - name: Ensure correct home dir path (Python)
+      lineinfile:
+        path: "{{ playbook_dir }}/roles/utils/resources/.zshrc"
+        regexp: "^export PYTHON_PACKAGES"
+        line: "export PYTHON_PACKAGES=\"{{ user_home }}/.local/bin\""
+        insertbefore: "### Python3 package installation workaround"
+
     - name: Install ../resources dotfiles
       block:
         - name: New .zshrc
@@ -99,10 +121,3 @@
         block: |
           store-passwords = yes
           store-plaintext-passwords = yes
-
-- name: Configuration notices
-  debug:
-    msg:
-      - "The utils role has made the following changes:"
-      - " - Exported $JAVA_HOME in {{ profile_location }}."
-      - " - Configured Subversion CLI to store plaintext passwords."
